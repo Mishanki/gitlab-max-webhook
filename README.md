@@ -1,12 +1,7 @@
 # Gitlab webhook notifications
-#### Gitlab notification via telegram bot
+#### Gitlab notification via [Max messager](http://max.ru) bot
 
 ![example](storage/app/public/example.png)
-
-## Install
-```bash
-composer create-project larahook/gitlab-notification
-```
 
 ## Run project
 
@@ -20,10 +15,10 @@ cp .env.example .env
 Update config
 ```dotenv
 # Telegram
-TELEGRAM_BOT_HOST=https://api.telegram.org/bot
-TELEGRAM_BOT_TOKEN=bot_id:token
-TELEGRAM_BOT_TIMEOUT=7
-TELEGRAM_HASH_CHAT_IDS=some_hash_1:-1001234567890;some_hash_2:some_chat_id_2
+MAX_BOT_HOST=https://botapi.max.ru
+MAX_BOT_TOKEN=access_token
+MAX_BOT_TIMEOUT=7
+MAX_HASH_CHAT_IDS=some_hash_1:-1001234567890;some_hash_2:some_chat_id_2
 
 # Outgoing Rate limiter: 20rpm
 RATE_LIMITER_ALLOW=20
