@@ -2,11 +2,10 @@
 
 namespace App\Services\v1\Webhook;
 
-use App\Network\Telegram\TelegramHTTPServiceInterface;
+use App\Network\Max\MaxHTTPServiceInterface;
 use App\Repositories\HookRepositoryInterface;
 use App\Services\v1\Webhook\Entity\SendEntity;
 use App\Services\v1\Webhook\Factory\WebhookFactoryInterface;
-use App\Services\v1\Webhook\Rule\MergeRequest\MergeRequestOpenRule;
 use App\Services\v1\Webhook\Rule\WikiPage\WikiPageRule;
 use App\Services\v1\Webhook\Trait\RuleTrait;
 
@@ -15,11 +14,11 @@ class WikiService implements WebhookFactoryInterface
     use RuleTrait;
 
     /**
-     * @param TelegramHTTPServiceInterface $http
+     * @param MaxHTTPServiceInterface $http
      * @param HookRepositoryInterface $hookRepository
      */
     public function __construct(
-        public TelegramHTTPServiceInterface $http,
+        public MaxHTTPServiceInterface $http,
         public HookRepositoryInterface $hookRepository,
     ) {}
 

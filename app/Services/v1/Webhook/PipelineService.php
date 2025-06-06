@@ -5,7 +5,7 @@ namespace App\Services\v1\Webhook;
 use App\Helper\IconHelper;
 use App\Helper\StatusHelper;
 use App\Models\Hook\HookModel;
-use App\Network\Telegram\TelegramHTTPServiceInterface;
+use App\Network\Max\MaxHTTPServiceInterface;
 use App\Repositories\HookRepositoryInterface;
 use App\Services\v1\Webhook\Entity\SendEntity;
 use App\Services\v1\Webhook\Factory\WebhookFactoryInterface;
@@ -20,11 +20,11 @@ class PipelineService implements WebhookFactoryInterface
     use RuleTrait;
 
     /**
-     * @param TelegramHTTPServiceInterface $http
+     * @param MaxHTTPServiceInterface $http
      * @param HookRepositoryInterface $hookRepository
      */
     public function __construct(
-        public TelegramHTTPServiceInterface $http,
+        public MaxHTTPServiceInterface $http,
         public HookRepositoryInterface $hookRepository,
     ) {}
 
@@ -146,11 +146,11 @@ class PipelineService implements WebhookFactoryInterface
         $id = $update['item']['build_id'];
         $nextStatus = $update['item']['status'];
         $reset = false;
-        if (!$currentStatus = $data['message'][$id]['status'] ?? null) {
-            $data = $this->updateBuildId($id, $data, $update);
-            $currentStatus = $data['message'][$id]['status'] ?? null;
-            $reset = true;
-        }
+        //        if (!$currentStatus = $data['message'][$id]['status'] ?? null) {
+        $data = $this->updateBuildId($id, $data, $update);
+        $currentStatus = $data['message'][$id]['status'] ?? null;
+        $reset = true;
+        //        }
         foreach ($data['message'][$id] ?? [] as $k => $item) {
             if (!StatusHelper::isChange($currentStatus, $nextStatus) && !$reset) {
                 continue;
@@ -175,9 +175,10 @@ class PipelineService implements WebhookFactoryInterface
     private function updateBuildId(int $id, array $data, array $update): array
     {
         $dataCurrent = collect($data['message'])->where('name', '=', $update['item']['name']);
-        $oldId = $dataCurrent->keys()[0] ?? null;
-        $data['message'][$id] = $data['message'][$oldId];
-        unset($data['message'][$oldId]);
+        if ($oldId = $dataCurrent->keys()[0] ?? null) {
+            $data['message'][$id] = $data['message'][$oldId];
+            unset($data['message'][$oldId]);
+        }
         $data['message'] = $this->sortData($data['message']);
 
         return $data;

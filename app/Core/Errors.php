@@ -55,11 +55,11 @@ enum Errors: int
 
     case SQL_UNIQUE_KEY_ERROR = 1026;
 
-    case TELEGRAM_RESPONSE_ERROR = 9001;
+    case MAX_RESPONSE_ERROR = 9001;
 
-    case TELEGRAM_RULE_DUBLICATE_ERROR = 9002;
+    case MAX_RULE_DUBLICATE_ERROR = 9002;
 
-    case TELEGRAM_REQUEST_EXCEPTION = 9003;
+    case MAX_REQUEST_EXCEPTION = 9003;
 
     /**
      * @return string

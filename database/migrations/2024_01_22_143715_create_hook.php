@@ -16,7 +16,7 @@ return new class() extends Migration {
             $table->string('hash')->comment('SHA hash after commit');
             $table->jsonb('body')->comment('Gitlab request body');
             $table->bigInteger('event_id')->nullable()->comment('Some event id');
-            $table->bigInteger('message_id')->nullable()->unsigned()->comment('Telegram message id');
+            $table->string('message_id')->nullable()->unsigned()->comment('Telegram message id');
             $table->jsonb('short_body')->nullable()->comment('Short body format');
             $table->jsonb('render')->nullable()->comment('Render template');
             $table->timestamps();

@@ -15,7 +15,7 @@ use Illuminate\Support\Carbon;
  * @property string $hash
  * @property string $body
  * @property null|int $event_id
- * @property null|int $message_id
+ * @property null|string $message_id
  * @property null|string $short_body
  * @property null|string $render
  * @property null|Carbon $created_at

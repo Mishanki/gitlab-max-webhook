@@ -2,7 +2,7 @@
 
 namespace App\Services\v1\Webhook;
 
-use App\Network\Telegram\TelegramHTTPServiceInterface;
+use App\Network\Max\MaxHTTPServiceInterface;
 use App\Repositories\HookRepositoryInterface;
 use App\Services\v1\Webhook\Entity\SendEntity;
 use App\Services\v1\Webhook\Factory\WebhookFactoryInterface;
@@ -14,11 +14,11 @@ class FeatureFlagService implements WebhookFactoryInterface
     use RuleTrait;
 
     /**
-     * @param TelegramHTTPServiceInterface $http
+     * @param MaxHTTPServiceInterface $http
      * @param HookRepositoryInterface $hookRepository
      */
     public function __construct(
-        public TelegramHTTPServiceInterface $http,
+        public MaxHTTPServiceInterface $http,
         public HookRepositoryInterface $hookRepository,
     ) {}
 

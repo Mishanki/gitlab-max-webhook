@@ -2,7 +2,7 @@
 
 namespace App\Services\v1\Webhook;
 
-use App\Network\Telegram\TelegramHTTPServiceInterface;
+use App\Network\Max\MaxHTTPServiceInterface;
 use App\Repositories\HookRepositoryInterface;
 use App\Services\v1\Webhook\Entity\SendEntity;
 use App\Services\v1\Webhook\Factory\WebhookFactoryInterface;
@@ -16,12 +16,12 @@ class PushService implements WebhookFactoryInterface
     use RuleTrait;
 
     /**
-     * @param TelegramHTTPServiceInterface $http
+     * @param MaxHTTPServiceInterface $http
      * @param HookRepositoryInterface $hookRepository
      * @param PipelineService $pipelineService
      */
     public function __construct(
-        public TelegramHTTPServiceInterface $http,
+        public MaxHTTPServiceInterface $http,
         public HookRepositoryInterface $hookRepository,
         public PipelineService $pipelineService,
     ) {}
@@ -87,7 +87,7 @@ class PushService implements WebhookFactoryInterface
     {
         $tpl = view('push.default', $data)->render();
         if ($render) {
-            $tpl = $tpl. PHP_EOL . $render.PHP_EOL;
+            $tpl = $tpl.PHP_EOL.$render.PHP_EOL;
         }
 
         return $tpl;

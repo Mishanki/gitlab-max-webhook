@@ -2,10 +2,10 @@
 
 namespace App\Providers;
 
-use App\Network\Telegram\TelegramHTTP;
-use App\Network\Telegram\TelegramHTTPInterface;
-use App\Network\Telegram\TelegramHTTPService;
-use App\Network\Telegram\TelegramHTTPServiceInterface;
+use App\Network\Max\MaxHTTP;
+use App\Network\Max\MaxHTTPInterface;
+use App\Network\Max\MaxHTTPService;
+use App\Network\Max\MaxHTTPServiceInterface;
 use App\Repositories\HookRepository;
 use App\Repositories\HookRepositoryInterface;
 use Barryvdh\LaravelIdeHelper\IdeHelperServiceProvider;
@@ -22,10 +22,9 @@ class AppServiceProvider extends ServiceProvider
             $this->app->register(IdeHelperServiceProvider::class);
         }
 
-        # Telegram netwrok
-        $this->app->bind(TelegramHTTPServiceInterface::class, TelegramHTTPService::class);
-        $this->app->bind(TelegramHTTPInterface::class, TelegramHTTP::class);
-
+        # Max
+        $this->app->bind(MaxHTTPInterface::class, MaxHTTP::class);
+        $this->app->bind(MaxHTTPServiceInterface::class, MaxHTTPService::class);
         # Hook model
         $this->app->bind(HookRepositoryInterface::class, HookRepository::class);
     }

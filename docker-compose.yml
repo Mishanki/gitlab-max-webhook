@@ -9,7 +9,7 @@ services:
      - $PWD/redis-data:/var/lib/redis
      - $PWD/redis.conf:/usr/local/etc/redis/redis.conf
   nginx:
-    hostname: telegram-gitlab-nginx
+    hostname: max-gitlab-nginx
     image: nginx:latest
     container_name: gitlab-notification-nginx
     ports:
@@ -24,7 +24,7 @@ services:
       - app
     working_dir: /var/www
   app:
-    hostname: telegram-gitlab-app
+    hostname: max-gitlab-app
     build:
       context: .
       dockerfile: _docker/local/app/Dockerfile
@@ -40,8 +40,8 @@ services:
    build:
         context: .
         dockerfile: _docker/local/app/Dockerfile
-   container_name: gitlab-notification-queue
-   hostname: telegram-gitlab-queue
+   container_name: max-notification-queue
+   hostname: max-gitlab-queue
    command: php artisan queue:listen database --queue=${QUEUE_NAME:-default} --timeout=1800 --tries=${QUEUE_TRIES:-10} --delay=${QUEUE_DELAY:-3}
    restart: always
    volumes:
