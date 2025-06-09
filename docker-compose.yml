@@ -58,4 +58,4 @@ services:
     environment:
       POSTGRES_PASSWORD: postgres
     ports:
-      - 15512:5432
+      - 15513:5432
