@@ -11,7 +11,7 @@ class HashHelper
      */
     public static function getChatIdByHash(string $hash): ?string
     {
-        $envHash = env('TELEGRAM_HASH_CHAT_IDS');
+        $envHash = env('MAX_HASH_CHAT_IDS');
         $envHashArr = explode(';', $envHash);
         foreach ($envHashArr as $envHashItem) {
             $itemArr = explode(':', $envHashItem);
