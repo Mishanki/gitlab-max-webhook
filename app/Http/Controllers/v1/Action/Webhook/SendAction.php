@@ -5,7 +5,6 @@ namespace App\Http\Controllers\v1\Action\Webhook;
 use App\Http\Requests\v1\Webhook\SendRequest;
 use App\Jobs\ProcessWebhook;
 use App\Services\v1\Webhook\Entity\SendEntity;
-use App\Services\v1\Webhook\Factory\WebhookFactory;
 use Illuminate\Http\JsonResponse;
 
 class SendAction extends BaseController
@@ -23,14 +22,10 @@ class SendAction extends BaseController
         $entity->setHash($request->validated('hash'));
         $entity->setBody($request->validated('body'));
 
-//        ProcessWebhook::dispatch(
-//            $entity,
-//            $this->webhookFactory,
-//        );
-
-        $factory = app()->make(WebhookFactory::class);
-//        public WebhookFactory $webhookFactory,
-        $this->webhookFactory->create($entity->hook)->send($entity);
+        ProcessWebhook::dispatch(
+            $entity,
+            $this->webhookFactory,
+        );
 
         return response()
             ->json([
