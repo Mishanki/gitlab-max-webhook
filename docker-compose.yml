@@ -54,7 +54,7 @@ services:
       dockerfile: _docker/local/db/Dockerfile
     container_name: gitlab-notification-db
     volumes:
-      - ./tmp/postgresql_gitlab_db:/var/lib/postgresql/data
+      - ./tmp/postgresql_max_gitlab_db:/var/lib/postgresql/data
     environment:
       POSTGRES_PASSWORD: postgres
     ports:
