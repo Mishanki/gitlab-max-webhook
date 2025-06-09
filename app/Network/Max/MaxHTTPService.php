@@ -70,7 +70,11 @@ class MaxHTTPService implements MaxHTTPServiceInterface
             throw new ApplicationException('Max response error: '.$message, Errors::MAX_RESPONSE_ERROR->value);
         }
 
-        return $response['result'] ?? null;
+        $messageId = $response->json('message')['body']['mid'];
+
+        return [
+            'message_id' => $messageId,
+        ];
     }
 
     /**
