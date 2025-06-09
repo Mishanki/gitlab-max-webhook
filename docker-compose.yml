@@ -2,7 +2,7 @@ version: '3'
 services:
   redisnotif-max:
     image: redis:latest
-    container_name: gitlab-notification-redis
+    container_name: gitlab-notification-redis-max
     ports:
      - "6479:6379"
     volumes:
@@ -11,7 +11,7 @@ services:
   nginx:
     hostname: max-gitlab-nginx
     image: nginx:latest
-    container_name: gitlab-notification-nginx
+    container_name: gitlab-notification-nginx-max
     ports:
       - ${APP_HTTP_PORT:-3000}:80
     volumes:
@@ -28,7 +28,7 @@ services:
     build:
       context: .
       dockerfile: _docker/local/app/Dockerfile
-    container_name: gitlab-notification-app
+    container_name: gitlab-notification-app-max
     volumes:
       - ./:/var/www
     depends_on:
@@ -40,7 +40,7 @@ services:
    build:
         context: .
         dockerfile: _docker/local/app/Dockerfile
-   container_name: max-notification-queue
+   container_name: max-notification-queue-max
    hostname: max-gitlab-queue
    command: php artisan queue:listen database --queue=${QUEUE_NAME:-default} --timeout=1800 --tries=${QUEUE_TRIES:-10} --delay=${QUEUE_DELAY:-3}
    restart: always
@@ -52,7 +52,7 @@ services:
     build:
       context: .
       dockerfile: _docker/local/db/Dockerfile
-    container_name: gitlab-notification-db
+    container_name: gitlab-notification-db-max
     volumes:
       - ./tmp/postgresql_max_gitlab_db:/var/lib/postgresql/data
     environment:
