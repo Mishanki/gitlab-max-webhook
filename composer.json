@@ -1,8 +1,8 @@
 {
-    "name": "larahook/gitlab-notification",
+    "name": "larahook/gitlab-max-notification",
     "type": "project",
-    "description": "Webhook gitlab notification via telegram bot",
-    "keywords": ["laravel", "gitlab", "telegram", "bot", "webhook", "notification", "events", "pipeline", "job", "commit", "push", "event"],
+    "description": "Webhook gitlab notification via max bot",
+    "keywords": ["laravel", "gitlab", "max", "bot", "webhook", "notification", "events", "pipeline", "job", "commit", "push", "event"],
     "authors": [
         {
             "name": "Mikhail Mishankin",
